@@ -1,0 +1,32 @@
+useEffect(() => {
+    function handleFilterResultGames() {
+      
+      let result1;
+      const newTeamStats = {};
+      allGames.partidas.forEach(
+        ({ mandante, visitante, placar_mandante, placar_visitante }) => {
+          if (!newTeamStats[mandante]) {
+            newTeamStats[mandante] = { vitorias: 0, derrotas: 0 };
+          }
+          if (!newTeamStats[visitante]) {
+            newTeamStats[visitante] = { vitorias: 0, derrotas: 0 };
+          }
+
+          if (placar_mandante > placar_visitante) {
+            newTeamStats[mandante].vitorias++;
+            newTeamStats[visitante].derrotas++;
+          } else if (placar_mandante < placar_visitante) {
+            newTeamStats[visitante].vitorias++;
+            newTeamStats[mandante].derrotas++;
+          }
+        }
+      );
+console.log(newTeamStats);
+      setAllResultGames(result1);
+    }
+    //console.log(apiGetAllGames(2023));
+    //console.log(allResultGames);
+
+    handleFilterResultGames();
+    
+  }, [allGames]);
